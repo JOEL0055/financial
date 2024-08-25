@@ -1,11 +1,14 @@
 from flask import Flask, render_template, request
-import joblib  # Import the joblib library
+import joblib ib  # Import the joblib library
+import os
 
 app = Flask(__name__, template_folder="/Users/joelaiweithai/Downloads/templates")
+
 
 # Load the trained model
 model = joblib.load('/Users/joelaiweithai/Downloads/house_price_model.pkl')
 
+# Singapore jokes and financial news
 singapore_jokes = [
     "The only thing faster than Singapore's MRT during peak hours is the way we 'chope' seats with a tissue packet.",
     "In Singapore, the safest way to cross the road is to jaywalk... Just kidding, follow the green man!",
