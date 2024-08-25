@@ -6,6 +6,7 @@ app = Flask(__name__, template_folder="/Users/joelaiweithai/Downloads/templates"
 
 
 # Load the trained model
+model_path = os.path.join(os.path.dirname(__file__), 'house_price_model.pkl')
 model = joblib.load('/Users/joelaiweithai/Downloads/house_price_model.pkl')
 
 # Singapore jokes and financial news
