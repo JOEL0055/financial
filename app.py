@@ -1,11 +1,17 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
+import os
 
-app = Flask(__name__, template_folder="/Users/joelaiweithai/Downloads/templates")
+# Initialize the Flask application
+app = Flask(__name__, template_folder="financial/templates")
 
-@app.route("/", methods=["GET", "POST", "HEAD"])
+@app.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    # Specify a different port using the 'port' keyword argument
-    app.run(port=5002)
+    # Print the template folder path for debugging
+    print(f"Template folder: {app.template_folder}")
+    print(f"Index exists: {os.path.exists(os.path.join(app.template_folder, 'index.html'))}")
+    
+    # Run the Flask app
+    app.run(debug=True, port=5002)
