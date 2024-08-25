@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* General styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container for content */
+        .container {
+            text-align: center;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            transform: translateY(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Title style */
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        /* Button styles */
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #f06595);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #f06595, #ff6b6b);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* Joke text style */
+        #jokeText {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #555;
+            font-style: italic;
+            padding: 20px;
+            background-color: #f1f2f6;
+            border-radius: 10px;
+            border: 1px solid #dcdde1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #jokeText.show {
+            display: block;
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Prediction App</h1>
+        <button onclick="displayContent('joke')">Show Singapore Joke</button>
+        <button onclick="displayContent('news')">Show Financial News</button>
+        <p id="jokeText"></p>
+    </div>
+
+    <script>
+        const singaporeJokes = [
+            "The only thing faster than Singapore's MRT during peak hours is the way we 'chope' seats with a tissue packet.",
+            "In Singapore, the safest way to cross the road is to jaywalk... Just kidding, follow the green man!",
+            "Why did the durian cross the road? To 'chope' the best spot at the hawker centre!"
+        ];
+
+        const financialNews = [
+            "Jay Powell has signalled he is ready to cut US interest rates in September, as he warned that 'downside risks' to the labour market had increased.",
+            "Global markets remain volatile amid ongoing trade tensions between the US and China.",
+            "Tech stocks surged today as investors anticipated strong earnings reports from industry leaders."
+        ];
+
+        function displayContent(type) {
+            let contentArray;
+            if (type === 'joke') {
+                contentArray = singaporeJokes;
+            } else if (type === 'news') {
+                contentArray = financialNews;
+            }
+
+            const randomContent = contentArray[Math.floor(Math.random() * contentArray.length)];
+            const jokeText = document.getElementById("jokeText");
+            jokeText.innerText = randomContent;
+            jokeText.classList.add('show');
+        }
+    </script>
+</body>
+</html>
