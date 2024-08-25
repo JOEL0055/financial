@@ -7,3 +7,4 @@ itsdangerous
 markupsafe
 requests
 joblib
+scikit-learn
