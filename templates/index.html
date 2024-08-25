@@ -33,11 +33,17 @@
             letter-spacing: 1px;
         }
 
-        .button-group {
+        form {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
         button {
@@ -58,96 +64,46 @@
             transform: scale(1.05);
         }
 
-        button.reset-button {
-            background: #888;
-        }
-
-        #contentArea {
-            margin-top: 30px;
-            font-size: 1.2em;
+        .result {
+            margin-top: 20px;
+            font-size: 1.5em;
             color: #555;
-            padding: 20px;
-            background-color: #f1f2f6;
-            border-radius: 10px;
-            border: 1px solid #dcdde1;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            display: none;
-            text-align: left;
         }
 
-        #contentArea.show {
-            display: block;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        #jokeText, #newsText {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Prediction App</h1>
-        <div class="button-group">
-            <button onclick="displayContent('joke')">Show Singapore Joke</button>
-            <button onclick="displayContent('news')">Show Financial News</button>
-            <button onclick="displayAnswers()">View Analysis Answers</button>
-            <button class="reset-button" onclick="resetContent()">Reset</button>
-        </div>
-        <div id="contentArea"></div>
+        <h1>Prediction App</h1>
+        <form method="POST">
+            <input type="number" name="square_feet" placeholder="Enter square feet" required>
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">{{ prediction }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <button type="submit" name="joke_button" value="1">Show Singapore Joke</button>
+        </form>
+
+        {% if joke %}
+            <div id="jokeText">{{ joke }}</div>
+        {% endif %}
+
+        <form method="POST">
+            <button type="submit" name="news_button" value="1">Show Financial News</button>
+        </form>
+
+        {% if news %}
+            <div id="newsText">{{ news }}</div>
+        {% endif %}
     </div>
-
-    <script>
-        const singaporeJokes = [
-            "The only thing faster than Singapore's MRT during peak hours is the way we 'chope' seats with a tissue packet.",
-            "In Singapore, the safest way to cross the road is to jaywalk... Just kidding, follow the green man!",
-            "Why did the durian cross the road? To 'chope' the best spot at the hawker centre!"
-        ];
-
-        const financialNews = [
-            "Jay Powell has signalled he is ready to cut US interest rates in September, as he warned that 'downside risks' to the labour market had increased.",
-            "Global markets remain volatile amid ongoing trade tensions between the US and China.",
-            "Tech stocks surged today as investors anticipated strong earnings reports from industry leaders."
-        ];
-
-        const analysisAnswers = `
-            <h2>Prescriptive Analysis Questions</h2>
-            <strong>1. Why is prediction important across diverse fields, and how does it influence decision-making processes?</strong>
-            <p>Prediction is crucial across various fields as it allows businesses and organizations to anticipate future trends, behaviors, and outcomes, thereby making informed decisions. It helps in risk management, resource allocation, and strategic planning by providing data-driven insights that guide actions toward achieving desired objectives.</p>
-
-            <strong>2. What methods are commonly used to evaluate the effectiveness of prediction models?</strong>
-            <p>Common methods for evaluating prediction models include accuracy, precision, recall, F1 score, ROC-AUC, and cross-validation. These metrics help assess how well the model performs on unseen data and whether it meets the desired performance criteria.</p>
-
-            <strong>3. What role do emerging technologies like artificial intelligence and deep learning play in advancing prediction capabilities and applications?</strong>
-            <p>Emerging technologies like AI and deep learning have significantly advanced prediction capabilities by enabling the analysis of vast amounts of data with high accuracy. These technologies can uncover complex patterns and relationships that traditional models might miss, leading to more robust and insightful predictions applicable across various domains.</p>
-        `;
-
-        function displayContent(type) {
-            let contentArray;
-            if (type === 'joke') {
-                contentArray = singaporeJokes;
-            } else if (type === 'news') {
-                contentArray = financialNews;
-            }
-
-            const randomContent = contentArray[Math.floor(Math.random() * contentArray.length)];
-            const contentArea = document.getElementById("contentArea");
-            contentArea.innerHTML = `<p>${randomContent}</p>`;
-            contentArea.classList.add('show');
-        }
-
-        function displayAnswers() {
-            const contentArea = document.getElementById("contentArea");
-            contentArea.innerHTML = analysisAnswers;
-            contentArea.classList.add('show');
-        }
-
-        function resetContent() {
-            const contentArea = document.getElementById("contentArea");
-            contentArea.innerHTML = '';
-            contentArea.classList.remove('show');
-        }
-    </script>
 </body>
 </html>
