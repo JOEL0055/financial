@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import joblib 
 import os
 
-app = Flask(__name__, template_folder="/Users/joelaiweithai/Downloads/templates")
+app = Flask(__name__)
 
 
 # Load the trained model
