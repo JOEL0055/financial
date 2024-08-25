@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import joblib ib  # Import the joblib library
+import joblib 
 import os
 
 app = Flask(__name__, template_folder="/Users/joelaiweithai/Downloads/templates")
