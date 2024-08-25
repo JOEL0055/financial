@@ -23,7 +23,7 @@ financial_news = [
     "Tech stocks surged today as investors anticipated strong earnings reports from industry leaders."
 ]
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST","HEAD"])
 def index():
     prediction = None
     joke = None
