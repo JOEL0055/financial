@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import os
 
 # Initialize the Flask application
-app = Flask(__name__, template_folder="financial/templates")
+app = Flask(__name__, template_folder="templates")
 
 @app.route("/", methods=["GET"])
 def index():
