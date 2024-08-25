@@ -1,2 +1,8 @@
 flask
 gunicorn
+jinja2
+werkzeug
+click
+itsdangerous
+markupsafe
+requests
