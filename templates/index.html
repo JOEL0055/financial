@@ -3,106 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prediction App</title>
+    <title>Singapore Insights</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f7f7f7;
+            background-color: #f0f4f8;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: #333;
         }
 
         .container {
             text-align: center;
             background: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            max-width: 600px;
+            max-width: 500px;
             width: 100%;
         }
 
         h1 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-bottom: 20px;
             color: #333;
             letter-spacing: 1px;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        input {
-            padding: 10px;
+        p {
             font-size: 1.2em;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            color: #555;
+            margin-bottom: 30px;
         }
 
         button {
-            background: linear-gradient(45deg, #ff6b6b, #f06595);
+            background: linear-gradient(45deg, #007bff, #00d4ff);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 20px;
             font-size: 1.1em;
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease-in-out;
+            margin-top: 20px;
+            width: 80%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         button:hover {
-            background: linear-gradient(45deg, #f06595, #ff6b6b);
+            background: linear-gradient(45deg, #00d4ff, #007bff);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             transform: scale(1.05);
         }
 
         .result {
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 1.5em;
-            color: #555;
-        }
-
-        #jokeText, #newsText {
-            margin-top: 20px;
-            font-size: 1.2em;
-            color: #333;
+            color: #007bff;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Prediction App</h1>
-        <form method="POST">
-            <input type="number" name="square_feet" placeholder="Enter square feet" required>
-            <button type="submit">Predict Price</button>
-        </form>
-
-        {% if prediction %}
-            <div class="result">{{ prediction }}</div>
-        {% endif %}
+        <h1>Singapore Insights</h1>
+        <p>Click a button below to get a quick dose of humor or the latest financial news!</p>
 
         <form method="POST">
             <button type="submit" name="joke_button" value="1">Show Singapore Joke</button>
         </form>
 
-        {% if joke %}
-            <div id="jokeText">{{ joke }}</div>
-        {% endif %}
-
         <form method="POST">
             <button type="submit" name="news_button" value="1">Show Financial News</button>
         </form>
 
+        {% if joke %}
+            <div class="result">{{ joke }}</div>
+        {% endif %}
+
         {% if news %}
-            <div id="newsText">{{ news }}</div>
+            <div class="result">{{ news }}</div>
         {% endif %}
     </div>
 </body>
