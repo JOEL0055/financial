@@ -1,50 +1,29 @@
 from flask import Flask, render_template, request
-import joblib 
-import os
+import random
 
 app = Flask(__name__)
 
-
-# Load the trained model
-model_path = os.path.join(os.path.dirname(__file__), 'house_price_model.pkl')
-model = joblib.load(model_path)
-
-
-# Singapore jokes and financial news
-singapore_jokes = [
+jokes = [
     "The only thing faster than Singapore's MRT during peak hours is the way we 'chope' seats with a tissue packet.",
-    "In Singapore, the safest way to cross the road is to jaywalk... Just kidding, follow the green man!",
-    "Why did the durian cross the road? To 'chope' the best spot at the hawker centre!"
+    "Why did the chicken cross the road in Singapore? To get away from the ERP!"
 ]
 
-financial_news = [
+news = [
     "Jay Powell has signalled he is ready to cut US interest rates in September, as he warned that 'downside risks' to the labour market had increased.",
-    "Global markets remain volatile amid ongoing trade tensions between the US and China.",
-    "Tech stocks surged today as investors anticipated strong earnings reports from industry leaders."
+    "Singapore's economy is expected to grow by 4% this year, driven by strong manufacturing and exports."
 ]
 
-@app.route("/", methods=["GET", "POST","HEAD"])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    prediction = None
     joke = None
-    news = None
-
-    if request.method == "POST":
-        if 'square_feet' in request.form:
-            # Predict the house price
-            square_feet = float(request.form['square_feet'])
-            predicted_price = model.predict([[square_feet]])[0]
-            prediction = f"Predicted Price: ${predicted_price:,.2f}"
-
+    news_item = None
+    if request.method == 'POST':
         if 'joke_button' in request.form:
-            # Display a random Singapore joke
-            joke = singapore_jokes[int(request.form['joke_button']) % len(singapore_jokes)]
-        
-        if 'news_button' in request.form:
-            # Display a random financial news item
-            news = financial_news[int(request.form['news_button']) % len(financial_news)]
+            joke = random.choice(jokes)  # Randomizing the joke
+        elif 'news_button' in request.form:
+            news_item = random.choice(news)  # Randomizing the news
 
-    return render_template("index.html", prediction=prediction, joke=joke, news=news)
+    return render_template('index.html', joke=joke, news=news_item)
 
-if __name__ == "__main__":
-    app.run(port=5005)
+if __name__ == '__main__':
+    app.run(port=5006)
